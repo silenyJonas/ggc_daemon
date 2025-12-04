@@ -1,0 +1,1889 @@
+{
+  "main_castle_cords": {
+    "green": {
+      "x": 10,
+      "y": 1111
+    },
+    "winter": {
+      "x": 762,
+      "y": 717
+    },
+    "sand": {
+      "x": 805,
+      "y": 824
+    },
+    "fire": {
+      "x": 656,
+      "y": 781
+    },
+     "water": {
+      "x": 0,
+      "y": 0
+    }
+  },
+  "settings": {
+    "screen": {
+      "width": 1920,
+      "height": 1080
+    },
+    "offsets": {
+      "default_mouse_x_offset": 5,
+      "default_mouse_y_offset": 5,
+      "default_time_delay_offset": 0,
+      "default_click_delay": 0.25,
+      "default_time_before_run": 5
+    },
+    "scan_screen_size": {
+      "x": 945,
+      "y": 503,
+      "width": 220,
+      "height": 23
+    },
+    "castle_list_cords" : {
+      "base_x" : 1841,
+      "base_y" : 1013,
+      "castle_y_1" : 993,
+      "castle_y_2" : 972,
+      "castle_y_3" : 951,
+      "castle_y_4" : 929,
+      "castle_y_5" : 910,
+      "castle_y_6" : 0,
+      "castle_y_7" : 0,
+      "castle_y_8" : 0,
+      "castle_y_9" : 0,
+      "castle_y_10" : 0
+    }
+  },
+  "entity_list": {
+    "fortress" : {
+      "winter": {
+
+      },
+      "sand": {
+
+      },
+      "fire": {
+
+      }
+    },
+    "barons": {
+      "green": {
+
+      },
+      "winter": {
+
+      },
+      "sand": {
+        "target_1": {
+          "x": 805,
+          "y": 824,
+          "cooldown": 0
+        },
+        "target_2": {
+          "x": 806,
+          "y": 829,
+          "cooldown": 0
+        },
+        "target_3": {
+          "x": 813,
+          "y": 826,
+          "cooldown": 0
+        },
+        "target_4": {
+          "x": 813,
+          "y": 821,
+          "cooldown": 0
+        },
+        "target_5": {
+          "x": 809,
+          "y": 819,
+          "cooldown": 0
+        },
+        "target_6": {
+          "x": 804,
+          "y": 817,
+          "cooldown": 0
+        },
+        "target_7": {
+          "x": 800,
+          "y": 822,
+          "cooldown": 0
+        },
+        "target_8": {
+          "x": 800,
+          "y": 815,
+          "cooldown": 0
+        },
+        "target_9": {
+          "x": 806,
+          "y": 813,
+          "cooldown": 0
+        },
+        "target_10": {
+          "x": 812,
+          "y": 816,
+          "cooldown": 0
+        },
+        "target_11": {
+          "x": 811,
+          "y": 812,
+          "cooldown": 0
+        },
+        "target_12": {
+          "x": 816,
+          "y": 814,
+          "cooldown": 0
+        },
+        "target_13": {
+          "x": 818,
+          "y": 821,
+          "cooldown": 0
+        },
+        "target_14": {
+          "x": 795,
+          "y": 823,
+          "cooldown": 0
+        },
+        "target_15": {
+          "x": 799,
+          "y": 828,
+          "cooldown": 0
+        },
+        "target_16": {
+          "x": 802,
+          "y": 831,
+          "cooldown": 0
+        },
+        "target_17": {
+          "x": 893,
+          "y": 827,
+          "cooldown": 0
+        },
+        "target_18": {
+          "x": 794,
+          "y": 833,
+          "cooldown": 0
+        },
+        "target_19": {
+          "x": 811,
+          "y": 832,
+          "cooldown": 0
+        },
+        "target_20": {
+          "x": 808,
+          "y": 835,
+          "cooldown": 0
+        },
+        "target_21": {
+          "x": 817,
+          "y": 832,
+          "cooldown": 0
+        },
+        "target_22": {
+          "x": 820,
+          "y": 828,
+          "cooldown": 0
+        },
+        "target_23": {
+          "x": 822,
+          "y": 823,
+          "cooldown": 0
+        },
+        "target_24": {
+          "x": 823,
+          "y": 818,
+          "cooldown": 0
+        },
+        "target_25": {
+          "x": 824,
+          "y": 814,
+          "cooldown": 0
+        },
+        "target_26": {
+          "x": 790,
+          "y": 824,
+          "cooldown": 0
+        },
+        "target_27": {
+          "x": 789,
+          "y": 820,
+          "cooldown": 0
+        },
+        "target_28": {
+          "x": 793,
+          "y": 818,
+          "cooldown": 0
+        },
+        "target_29": {
+          "x": 790,
+          "y": 831,
+          "cooldown": 0
+        },
+        "target_30": {
+          "x": 801,
+          "y": 838,
+          "cooldown": 0
+        },
+        "target_31": {
+          "x": 805,
+          "y": 839,
+          "cooldown": 0
+        },
+        "target_32": {
+          "x": 812,
+          "y": 838,
+          "cooldown": 0
+        },
+        "target_33": {
+          "x": 816,
+          "y": 836,
+          "cooldown": 0
+        },
+        "target_34": {
+          "x": 820,
+          "y": 835,
+          "cooldown": 0
+        },
+        "target_35": {
+          "x": 823,
+          "y": 831,
+          "cooldown": 0
+        },
+        "target_36": {
+          "x": 824,
+          "y": 827,
+          "cooldown": 0
+        },
+        "target_37": {
+          "x": 829,
+          "y": 824,
+          "cooldown": 0
+        },
+        "target_38": {
+          "x": 828,
+          "y": 820,
+          "cooldown": 0
+        },
+        "target_39": {
+          "x": 785,
+          "y": 827,
+          "cooldown": 0
+        },
+        "target_40": {
+          "x": 784,
+          "y": 831,
+          "cooldown": 0
+        },
+        "target_41": {
+          "x": 787,
+          "y": 835,
+          "cooldown": 0
+        },
+        "target_42": {
+          "x": 781,
+          "y": 835,
+          "cooldown": 0
+        },
+        "target_43": {
+          "x": 781,
+          "y": 828,
+          "cooldown": 0
+        },
+        "target_44": {
+          "x": 802,
+          "y": 842,
+          "cooldown": 0
+        },
+        "target_45": {
+          "x": 811,
+          "y": 842,
+          "cooldown": 0
+        },
+        "target_46": {
+          "x": 819,
+          "y": 843,
+          "cooldown": 0
+        },
+        "target_47": {
+          "x": 813,
+          "y": 847,
+          "cooldown": 0
+        },
+        "target_48": {
+          "x": 808,
+          "y": 846,
+          "cooldown": 0
+        },
+        "target_49": {
+          "x": 802,
+          "y": 848,
+          "cooldown": 0
+        },
+        "target_50": {
+          "x": 802,
+          "y": 809,
+          "cooldown": 0
+        },
+        "target_51": {
+          "x": 783,
+          "y": 823,
+          "cooldown": 0
+        },
+        "target_52": {
+          "x": 784,
+          "y": 818,
+          "cooldown": 0
+        },
+        "target_53": {
+          "x": 789,
+          "y": 815,
+          "cooldown": 0
+        },
+        "target_54": {
+          "x": 793,
+          "y": 813,
+          "cooldown": 0
+        },
+        "target_55": {
+          "x": 797,
+          "y": 807,
+          "cooldown": 0
+        },
+        "target_56": {
+          "x": 792,
+          "y": 808,
+          "cooldown": 0
+        },
+        "target_57": {
+          "x": 788,
+          "y": 811,
+          "cooldown": 0
+        },
+        "target_58": {
+          "x": 785,
+          "y": 814,
+          "cooldown": 0
+        },
+        "target_59": {
+          "x": 802,
+          "y": 803,
+          "cooldown": 0
+        },
+        "target_60": {
+          "x": 808,
+          "y": 807,
+          "cooldown": 0
+        },
+        "target_61": {
+          "x": 813,
+          "y": 808,
+          "cooldown": 0
+        },
+        "target_62": {
+          "x": 811,
+          "y": 803,
+          "cooldown": 0
+        },
+        "target_63": {
+          "x": 820,
+          "y": 811,
+          "cooldown": 0
+        },
+        "target_64": {
+          "x": 823,
+          "y": 805,
+          "cooldown": 0
+        },
+        "target_65": {
+          "x": 819,
+          "y": 804,
+          "cooldown": 0
+        },
+        "target_66": {
+          "x": 827,
+          "y": 811,
+          "cooldown": 0
+        },
+        "target_67": {
+          "x": 828,
+          "y": 815,
+          "cooldown": 0
+        },
+        "target_68": {
+          "x": 834,
+          "y": 823,
+          "cooldown": 0
+        },
+        "target_69": {
+          "x": 832,
+          "y": 827,
+          "cooldown": 0
+        },
+        "target_70": {
+          "x": 829,
+          "y": 831,
+          "cooldown": 0
+        },
+        "target_71": {
+          "x": 826,
+          "y": 835,
+          "cooldown": 0
+        },
+        "target_72": {
+          "x": 824,
+          "y": 839,
+          "cooldown": 0
+        },
+        "target_73": {
+          "x": 823,
+          "y": 844,
+          "cooldown": 0
+        },
+        "target_74": {
+          "x": 820,
+          "y": 850,
+          "cooldown": 0
+        },
+        "target_75": {
+          "x": 811,
+          "y": 851,
+          "cooldown": 0
+        },
+        "target_76": {
+          "x": 806,
+          "y": 852,
+          "cooldown": 0
+        },
+        "target_77": {
+          "x": 800,
+          "y": 854,
+          "cooldown": 0
+        },
+        "target_78": {
+          "x": 797,
+          "y": 846,
+          "cooldown": 0
+        },
+        "target_79": {
+          "x": 795,
+          "y": 842,
+          "cooldown": 0
+        },
+        "target_80": {
+          "x": 793,
+          "y": 837,
+          "cooldown": 0
+        },
+        "target_81": {
+          "x": 790,
+          "y": 841,
+          "cooldown": 0
+        },
+        "target_82": {
+          "x": 785,
+          "y": 839,
+          "cooldown": 0
+        },
+        "target_83": {
+          "x": 792,
+          "y": 847,
+          "cooldown": 0
+        },
+        "target_84": {
+          "x": 788,
+          "y": 850,
+          "cooldown": 0
+        },
+        "target_85": {
+          "x": 784,
+          "y": 844,
+          "cooldown": 0
+        },
+        "target_86": {
+          "x": 780,
+          "y": 843,
+          "cooldown": 0
+        },
+        "target_87": {
+          "x": 777,
+          "y": 836,
+          "cooldown": 0
+        },
+        "target_88": {
+          "x": 778,
+          "y": 832,
+          "cooldown": 0
+        },
+        "target_89": {
+          "x": 774,
+          "y": 826,
+          "cooldown": 0
+        },
+        "target_90": {
+          "x": 779,
+          "y": 821,
+          "cooldown": 0
+        },
+        "target_91": {
+          "x": 774,
+          "y": 821,
+          "cooldown": 0
+        },
+        "target_92": {
+          "x": 777,
+          "y": 814,
+          "cooldown": 0
+        },
+        "target_93": {
+          "x": 781,
+          "y": 811,
+          "cooldown": 0
+        },
+        "target_94": {
+          "x": 784,
+          "y": 805,
+          "cooldown": 0
+        },
+        "target_95": {
+          "x": 790,
+          "y": 802,
+          "cooldown": 0
+        },
+        "target_96": {
+          "x": 795,
+          "y": 803,
+          "cooldown": 0
+        },
+        "target_97": {
+          "x": 801,
+          "y": 799,
+          "cooldown": 0
+        },
+        "target_98": {
+          "x": 805,
+          "y": 800,
+          "cooldown": 0
+        },
+        "target_99": {
+          "x": 812,
+          "y": 799,
+          "cooldown": 0
+        },
+        "target_100": {
+          "x": 808,
+          "y": 796,
+          "cooldown": 0
+        },
+        "target_101": {
+          "x": 770,
+          "y": 819,
+          "cooldown": 0
+        },
+        "target_102": {
+          "x": 773,
+          "y": 816,
+          "cooldown": 0
+        },
+        "target_103": {
+          "x": 772,
+          "y": 812,
+          "cooldown": 0
+        },
+        "target_104": {
+          "x": 774,
+          "y": 808,
+          "cooldown": 0
+        },
+        "target_105": {
+          "x": 780,
+          "y": 804,
+          "cooldown": 0
+        },
+        "target_106": {
+          "x": 785,
+          "y": 800,
+          "cooldown": 0
+        },
+        "target_107": {
+          "x": 787,
+          "y": 796,
+          "cooldown": 0
+        },
+        "target_108": {
+          "x": 793,
+          "y": 798,
+          "cooldown": 0
+        },
+        "target_109": {
+          "x": 794,
+          "y": 794,
+          "cooldown": 0
+        },
+        "target_110": {
+          "x": 790,
+          "y": 792,
+          "cooldown": 0
+        },
+        "target_111": {
+          "x": 802,
+          "y": 792,
+          "cooldown": 0
+        },
+        "target_112": {
+          "x": 806,
+          "y": 790,
+          "cooldown": 0
+        },
+        "target_113": {
+          "x": 799,
+          "y": 789,
+          "cooldown": 0
+        },
+        "target_114": {
+          "x": 811,
+          "y": 793,
+          "cooldown": 0
+        },
+        "target_115": {
+          "x": 816,
+          "y": 797,
+          "cooldown": 0
+        },
+        "target_116": {
+          "x": 820,
+          "y": 796,
+          "cooldown": 0
+        },
+        "target_117": {
+          "x": 817,
+          "y": 793,
+          "cooldown": 0
+        },
+        "target_118": {
+          "x": 820,
+          "y": 789,
+          "cooldown": 0
+        },
+        "target_119": {
+          "x": 823,
+          "y": 792,
+          "cooldown": 0
+        },
+        "target_120": {
+          "x": 826,
+          "y": 796,
+          "cooldown": 0
+        },
+        "target_121": {
+          "x": 824,
+          "y": 800,
+          "cooldown": 0
+        },
+        "target_122": {
+          "x": 829,
+          "y": 802,
+          "cooldown": 0
+        },
+        "target_123": {
+          "x": 834,
+          "y": 803,
+          "cooldown": 0
+        },
+        "target_124": {
+          "x": 831,
+          "y": 808,
+          "cooldown": 0
+        },
+        "target_125": {
+          "x": 836,
+          "y": 807,
+          "cooldown": 0
+        },
+        "target_126": {
+          "x": 832,
+          "y": 813,
+          "cooldown": 0
+        },
+        "target_127": {
+          "x": 839,
+          "y": 815,
+          "cooldown": 0
+        },
+        "target_128": {
+          "x": 832,
+          "y": 818,
+          "cooldown": 0
+        },
+        "target_129": {
+          "x": 843,
+          "y": 817,
+          "cooldown": 0
+        },
+        "target_130": {
+          "x": 839,
+          "y": 822,
+          "cooldown": 0
+        },
+        "target_131": {
+          "x": 838,
+          "y": 828,
+          "cooldown": 0
+        },
+        "target_132": {
+          "x": 841,
+          "y": 831,
+          "cooldown": 0
+        },
+        "target_133": {
+          "x": 833,
+          "y": 833,
+          "cooldown": 0
+        },
+        "target_134": {
+          "x": 832,
+          "y": 837,
+          "cooldown": 0
+        },
+        "target_135": {
+          "x": 829,
+          "y": 841,
+          "cooldown": 0
+        },
+        "target_136": {
+          "x": 834,
+          "y": 842,
+          "cooldown": 0
+        },
+        "target_137": {
+          "x": 831,
+          "y": 847,
+          "cooldown": 0
+        },
+        "target_138": {
+          "x": 827,
+          "y": 850,
+          "cooldown": 0
+        },
+        "target_139": {
+          "x": 824,
+          "y": 853,
+          "cooldown": 0
+        },
+        "target_140": {
+          "x": 816,
+          "y": 853,
+          "cooldown": 0
+        },
+        "target_141": {
+          "x": 812,
+          "y": 855,
+          "cooldown": 0
+        },
+        "target_142": {
+          "x": 809,
+          "y": 858,
+          "cooldown": 0
+        },
+        "target_143": {
+          "x": 804,
+          "y": 856,
+          "cooldown": 0
+        },
+        "target_144": {
+          "x": 793,
+          "y": 857,
+          "cooldown": 0
+        },
+        "target_145": {
+          "x": 793,
+          "y": 852,
+          "cooldown": 0
+        },
+        "target_146": {
+          "x": 789,
+          "y": 854,
+          "cooldown": 0
+        },
+        "target_147": {
+          "x": 785,
+          "y": 853,
+          "cooldown": 0
+        },
+        "target_148": {
+          "x": 781,
+          "y": 850,
+          "cooldown": 0
+        },
+        "target_149": {
+          "x": 772,
+          "y": 832,
+          "cooldown": 0
+        },
+        "target_150": {
+          "x": 773,
+          "y": 838,
+          "cooldown": 0
+        }
+      },
+      "fire": {
+        "target_1": {
+          "x": 656,
+          "y": 781,
+          "cooldown": 0
+        },
+        "target_2": {
+          "x": 652,
+          "y": 780,
+          "cooldown": 0
+        },
+        "target_3": {
+          "x": 649,
+          "y": 784,
+          "cooldown": 0
+        },
+        "target_4": {
+          "x": 659,
+          "y": 784,
+          "cooldown": 0
+        },
+        "target_5": {
+          "x": 656,
+          "y": 787,
+          "cooldown": 0
+        },
+        "target_6": {
+          "x": 647,
+          "y": 789,
+          "cooldown": 0
+        },
+        "target_7": {
+          "x": 644,
+          "y": 784,
+          "cooldown": 0
+        },
+        "target_8": {
+          "x": 645,
+          "y": 780,
+          "cooldown": 0
+        },
+        "target_9": {
+          "x": 654,
+          "y": 776,
+          "cooldown": 0
+        },
+        "target_10": {
+          "x": 661,
+          "y": 780,
+          "cooldown": 0
+        },
+        "target_11": {
+          "x": 659,
+          "y": 776,
+          "cooldown": 0
+        },
+        "target_12": {
+          "x": 653,
+          "y": 791,
+          "cooldown": 0
+        },
+        "target_13": {
+          "x": 657,
+          "y": 792,
+          "cooldown": 0
+        },
+        "target_14": {
+          "x": 660,
+          "y": 789,
+          "cooldown": 0
+        },
+        "target_15": {
+          "x": 663,
+          "y": 786,
+          "cooldown": 0
+        },
+        "target_16": {
+          "x": 641,
+          "y": 781,
+          "cooldown": 0
+        },
+        "target_17": {
+          "x": 642,
+          "y": 788,
+          "cooldown": 0
+        },
+        "target_18": {
+          "x": 648,
+          "y": 793,
+          "cooldown": 0
+        },
+        "target_19": {
+          "x": 665,
+          "y": 782,
+          "cooldown": 0
+        },
+        "target_20": {
+          "x": 664,
+          "y": 775,
+          "cooldown": 0
+        },
+        "target_21": {
+          "x": 650,
+          "y": 772,
+          "cooldown": 0
+        },
+        "target_22": {
+          "x": 641,
+          "y": 776,
+          "cooldown": 0
+        },
+        "target_23": {
+          "x": 636,
+          "y": 778,
+          "cooldown": 0
+        },
+        "target_24": {
+          "x": 632,
+          "y": 782,
+          "cooldown": 0
+        },
+        "target_25": {
+          "x": 641,
+          "y": 793,
+          "cooldown": 0
+        },
+        "target_26": {
+          "x": 647,
+          "y": 797,
+          "cooldown": 0
+        },
+        "target_27": {
+          "x": 655,
+          "y": 796,
+          "cooldown": 0
+        },
+        "target_28": {
+          "x": 660,
+          "y": 796,
+          "cooldown": 0
+        },
+        "target_29": {
+          "x": 665,
+          "y": 794,
+          "cooldown": 0
+        },
+        "target_30": {
+          "x": 671,
+          "y": 793,
+          "cooldown": 0
+        },
+        "target_31": {
+          "x": 669,
+          "y": 787,
+          "cooldown": 0
+        },
+        "target_32": {
+          "x": 671,
+          "y": 782,
+          "cooldown": 0
+        },
+        "target_33": {
+          "x": 674,
+          "y": 788,
+          "cooldown": 0
+        },
+        "target_34": {
+          "x": 668,
+          "y": 773,
+          "cooldown": 0
+        },
+        "target_35": {
+          "x": 672,
+          "y": 770,
+          "cooldown": 0
+        },
+        "target_36": {
+          "x": 666,
+          "y": 768,
+          "cooldown": 0
+        },
+        "target_37": {
+          "x": 662,
+          "y": 767,
+          "cooldown": 0
+        },
+        "target_38": {
+          "x": 659,
+          "y": 770,
+          "cooldown": 0
+        },
+        "target_39": {
+          "x": 655,
+          "y": 768,
+          "cooldown": 0
+        },
+        "target_40": {
+          "x": 643,
+          "y": 771,
+          "cooldown": 0
+        },
+        "target_41": {
+          "x": 636,
+          "y": 773,
+          "cooldown": 0
+        },
+        "target_42": {
+          "x": 638,
+          "y": 769,
+          "cooldown": 0
+        },
+        "target_43": {
+          "x": 642,
+          "y": 767,
+          "cooldown": 0
+        },
+        "target_44": {
+          "x": 648,
+          "y": 765,
+          "cooldown": 0
+        },
+        "target_45": {
+          "x": 654,
+          "y": 763,
+          "cooldown": 0
+        },
+        "target_46": {
+          "x": 643,
+          "y": 799,
+          "cooldown": 0
+        },
+        "target_47": {
+          "x": 688,
+          "y": 784,
+          "cooldown": 0
+        },
+        "target_48": {
+          "x": 654,
+          "y": 802,
+          "cooldown": 0
+        },
+        "target_49": {
+          "x": 660,
+          "y": 802,
+          "cooldown": 0
+        },
+        "target_50": {
+          "x": 663,
+          "y": 799,
+          "cooldown": 0
+        },
+        "target_51": {
+          "x": 633,
+          "y": 770,
+          "cooldown": 0
+        },
+        "target_52": {
+          "x": 634,
+          "y": 766,
+          "cooldown": 0
+        },
+        "target_53": {
+          "x": 640,
+          "y": 763,
+          "cooldown": 0
+        },
+        "target_54": {
+          "x": 643,
+          "y": 760,
+          "cooldown": 0
+        },
+        "target_55": {
+          "x": 647,
+          "y": 758,
+          "cooldown": 0
+        },
+        "target_56": {
+          "x": 655,
+          "y": 757,
+          "cooldown": 0
+        },
+        "target_57": {
+          "x": 660,
+          "y": 763,
+          "cooldown": 0
+        },
+        "target_58": {
+          "x": 663,
+          "y": 760,
+          "cooldown": 0
+        },
+        "target_59": {
+          "x": 667,
+          "y": 763,
+          "cooldown": 0
+        },
+        "target_60": {
+          "x": 673,
+          "y": 766,
+          "cooldown": 0
+        },
+        "target_61": {
+          "x": 677,
+          "y": 769,
+          "cooldown": 0
+        },
+        "target_62": {
+          "x": 675,
+          "y": 773,
+          "cooldown": 0
+        },
+        "target_63": {
+          "x": 675,
+          "y": 778,
+          "cooldown": 0
+        },
+        "target_64": {
+          "x": 680,
+          "y": 776,
+          "cooldown": 0
+        },
+        "target_65": {
+          "x": 680,
+          "y": 781,
+          "cooldown": 0
+        },
+        "target_66": {
+          "x": 681,
+          "y": 788,
+          "cooldown": 0
+        },
+        "target_67": {
+          "x": 680,
+          "y": 793,
+          "cooldown": 0
+        },
+        "target_68": {
+          "x": 675,
+          "y": 794,
+          "cooldown": 0
+        },
+        "target_69": {
+          "x": 676,
+          "y": 798,
+          "cooldown": 0
+        },
+        "target_70": {
+          "x": 672,
+          "y": 799,
+          "cooldown": 0
+        },
+        "target_71": {
+          "x": 668,
+          "y": 798,
+          "cooldown": 0
+        },
+        "target_72": {
+          "x": 667,
+          "y": 802,
+          "cooldown": 0
+        },
+        "target_73": {
+          "x": 662,
+          "y": 806,
+          "cooldown": 0
+        },
+        "target_74": {
+          "x": 659,
+          "y": 809,
+          "cooldown": 0
+        },
+        "target_75": {
+          "x": 655,
+          "y": 807,
+          "cooldown": 0
+        },
+        "target_76": {
+          "x": 654,
+          "y": 802,
+          "cooldown": 0
+        },
+        "target_77": {
+          "x": 648,
+          "y": 804,
+          "cooldown": 0
+        },
+        "target_78": {
+          "x": 642,
+          "y": 806,
+          "cooldown": 0
+        },
+        "target_79": {
+          "x": 640,
+          "y": 802,
+          "cooldown": 0
+        },
+        "target_80": {
+          "x": 637,
+          "y": 798,
+          "cooldown": 0
+        },
+        "target_81": {
+          "x": 633,
+          "y": 799,
+          "cooldown": 0
+        },
+        "target_82": {
+          "x": 636,
+          "y": 794,
+          "cooldown": 0
+        },
+        "target_83": {
+          "x": 632,
+          "y": 793,
+          "cooldown": 0
+        },
+        "target_84": {
+          "x": 635,
+          "y": 788,
+          "cooldown": 0
+        },
+        "target_85": {
+          "x": 630,
+          "y": 787,
+          "cooldown": 0
+        },
+        "target_86": {
+          "x": 624,
+          "y": 786,
+          "cooldown": 0
+        },
+        "target_87": {
+          "x": 626,
+          "y": 782,
+          "cooldown": 0
+        },
+        "target_88": {
+          "x": 622,
+          "y": 780,
+          "cooldown": 0
+        },
+        "target_89": {
+          "x": 625,
+          "y": 775,
+          "cooldown": 0
+        },
+        "target_90": {
+          "x": 629,
+          "y": 773,
+          "cooldown": 0
+        },
+        "target_91": {
+          "x": 627,
+          "y": 768,
+          "cooldown": 0
+        },
+        "target_92": {
+          "x": 673,
+          "y": 805,
+          "cooldown": 0
+        },
+        "target_93": {
+          "x": 666,
+          "y": 807,
+          "cooldown": 0
+        },
+        "target_94": {
+          "x": 679,
+          "y": 802,
+          "cooldown": 0
+        },
+        "target_95": {
+          "x": 682,
+          "y": 799,
+          "cooldown": 0
+        },
+        "target_96": {
+          "x": 683,
+          "y": 784,
+          "cooldown": 0
+        },
+        "target_97": {
+          "x": 684,
+          "y": 780,
+          "cooldown": 0
+        },
+        "target_98": {
+          "x": 682,
+          "y": 771,
+          "cooldown": 0
+        },
+        "target_99": {
+          "x": 681,
+          "y": 767,
+          "cooldown": 0
+        },
+        "target_100": {
+          "x": 679,
+          "y": 763,
+          "cooldown": 0
+        },
+        "target_101": {
+          "x": 620,
+          "y": 784,
+          "cooldown": 0
+        },
+        "target_102": {
+          "x": 617,
+          "y": 781,
+          "cooldown": 0
+        },
+        "target_103": {
+          "x": 620,
+          "y": 776,
+          "cooldown": 0
+        },
+        "target_104": {
+          "x": 620,
+          "y": 770,
+          "cooldown": 0
+        },
+        "target_105": {
+          "x": 623,
+          "y": 767,
+          "cooldown": 0
+        },
+        "target_106": {
+          "x": 628,
+          "y": 763,
+          "cooldown": 0
+        },
+        "target_107": {
+          "x": 633,
+          "y": 760,
+          "cooldown": 0
+        },
+        "target_108": {
+          "x": 629,
+          "y": 759,
+          "cooldown": 0
+        },
+        "target_109": {
+          "x": 637,
+          "y": 759,
+          "cooldown": 0
+        },
+        "target_110": {
+          "x": 636,
+          "y": 755,
+          "cooldown": 0
+        },
+        "target_111": {
+          "x": 641,
+          "y": 754,
+          "cooldown": 0
+        },
+        "target_112": {
+          "x": 648,
+          "y": 754,
+          "cooldown": 0
+        },
+        "target_113": {
+          "x": 653,
+          "y": 752,
+          "cooldown": 0
+        },
+        "target_114": {
+          "x": 657,
+          "y": 753,
+          "cooldown": 0
+        },
+        "target_115": {
+          "x": 660,
+          "y": 757,
+          "cooldown": 0
+        },
+        "target_116": {
+          "x": 660,
+          "y": 750,
+          "cooldown": 0
+        },
+        "target_117": {
+          "x": 665,
+          "y": 755,
+          "cooldown": 0
+        },
+        "target_118": {
+          "x": 668,
+          "y": 759,
+          "cooldown": 0
+        },
+        "target_119": {
+          "x": 672,
+          "y": 760,
+          "cooldown": 0
+        },
+        "target_120": {
+          "x": 676,
+          "y": 759,
+          "cooldown": 0
+        },
+        "target_121": {
+          "x": 675,
+          "y": 755,
+          "cooldown": 0
+        },
+        "target_122": {
+          "x": 682,
+          "y": 760,
+          "cooldown": 0
+        },
+        "target_123": {
+          "x": 687,
+          "y": 765,
+          "cooldown": 0
+        },
+        "target_124": {
+          "x": 689,
+          "y": 772,
+          "cooldown": 0
+        },
+        "target_125": {
+          "x": 691,
+          "y": 780,
+          "cooldown": 0
+        },
+        "target_126": {
+          "x": 686,
+          "y": 789,
+          "cooldown": 0
+        },
+        "target_127": {
+          "x": 687,
+          "y": 793,
+          "cooldown": 0
+        },
+        "target_128": {
+          "x": 686,
+          "y": 797,
+          "cooldown": 0
+        },
+        "target_129": {
+          "x": 681,
+          "y": 806,
+          "cooldown": 0
+        },
+        "target_130": {
+          "x": 677,
+          "y": 808,
+          "cooldown": 0
+        },
+        "target_131": {
+          "x": 672,
+          "y": 809,
+          "cooldown": 0
+        },
+        "target_132": {
+          "x": 675,
+          "y": 812,
+          "cooldown": 0
+        },
+        "target_133": {
+          "x": 668,
+          "y": 812,
+          "cooldown": 0
+        },
+        "target_134": {
+          "x": 664,
+          "y": 814,
+          "cooldown": 0
+        },
+        "target_135": {
+          "x": 659,
+          "y": 815,
+          "cooldown": 0
+        },
+        "target_136": {
+          "x": 661,
+          "y": 819,
+          "cooldown": 0
+        },
+        "target_137": {
+          "x": 654,
+          "y": 815,
+          "cooldown": 0
+        },
+        "target_138": {
+          "x": 650,
+          "y": 811,
+          "cooldown": 0
+        },
+        "target_139": {
+          "x": 643,
+          "y": 810,
+          "cooldown": 0
+        },
+        "target_140": {
+          "x": 641,
+          "y": 815,
+          "cooldown": 0
+        },
+        "target_141": {
+          "x": 636,
+          "y": 812,
+          "cooldown": 0
+        },
+        "target_142": {
+          "x": 638,
+          "y": 808,
+          "cooldown": 0
+        },
+        "target_143": {
+          "x": 634,
+          "y": 805,
+          "cooldown": 0
+        },
+        "target_144": {
+          "x": 633,
+          "y": 809,
+          "cooldown": 0
+        },
+        "target_145": {
+          "x": 628,
+          "y": 802,
+          "cooldown": 0
+        },
+        "target_146": {
+          "x": 629,
+          "y": 798,
+          "cooldown": 0
+        },
+        "target_147": {
+          "x": 624,
+          "y": 799,
+          "cooldown": 0
+        },
+        "target_148": {
+          "x": 626,
+          "y": 794,
+          "cooldown": 0
+        },
+        "target_149": {
+          "x": 621,
+          "y": 789,
+          "cooldown": 0
+        },
+        "target_150": {
+          "x": 617,
+          "y": 787,
+          "cooldown": 0
+        }
+      }
+    },
+    "nomadns": {
+
+    },
+    "berimond": {
+      "blue": {
+
+      },
+      "red": {
+
+      }
+    }
+  },
+  "horses": {
+    "gold": {
+      "x": 760,
+      "y": 486
+    },
+    "feather": {
+      "x": 1164,
+      "y": 485
+    }
+  },
+   "actions_click_patter": {
+     "bulk_buy": {
+       "click_1": {
+         "x": 1185,
+         "y": 675
+       },
+       "click_2": {
+         "x": 820,
+         "y": 550
+       },
+       "click_3": {
+         "x": 1067,
+         "y": 644
+       }
+     },
+     "buy_speed_bonus": {
+       "clicl_1": {
+         "x": 1750,
+         "y": 100
+       },
+       "clicl_2": {
+         "x": 1200,
+         "y": 720
+       },
+       "clicl_3": {
+         "x": 1140,
+         "y": 678
+       },
+       "clicl_4": {
+         "x": 1140,
+         "y": 678
+       },
+       "clicl_5": {
+         "x": 1333,
+         "y": 264
+       }
+     },
+     "fill_all_waves_atk" : {
+        "click_1" : {
+         "x": 341,
+         "y": 530
+       },
+       "click_2" : {
+         "x": 342,
+         "y": 630
+       },
+       "click_3" : {
+         "x": 1350,
+         "y": 700
+       }
+     },
+     "skip_samu_nomad_cd": {
+       "click_1" : {
+         "x": 1150,
+         "y": 500
+       },
+       "click_2" : {
+         "x": 1122,
+         "y": 550
+       }
+     },
+      "send_attack_first_wave_auto": {
+        "click_select_cords": {
+          "x": 851,
+          "y": 10
+        },
+        "click_1": {
+          "x": 958,
+          "y": 536
+        },
+        "click_2": {
+          "x": 1051,
+          "y": 565
+        },
+        "click_3": {
+          "x": 1052,
+          "y": 665
+        },
+        "click_4": {
+          "x": 1400,
+          "y": 800
+        },
+        "click_5": {
+          "x": 1400,
+          "y": 911
+        },
+        "click_6": {
+          "x": 1085,
+          "y": 750
+        }
+
+
+      },
+      "send_attack_first_wave_auto_rest_loot": {
+
+      },
+      "select_attack_code" : {
+        "base_click" : {
+          "x": 1400,
+          "y": 756
+        },
+        "code_1" : {
+          "x": 1400,
+          "y": 700
+        },
+        "code_2" : {
+          "x": 1400,
+          "y": 670
+        },
+        "code_3" : {
+          "x": 1400,
+          "y": 640
+        },
+        "code_4" : {
+          "x": 1400,
+          "y": 610
+        },
+        "code_5" : {
+          "x": 1400,
+          "y": 580
+        },
+        "code_6" : {
+          "x": 1400,
+          "y": 550
+        },
+        "code_7" : {
+          "x": 1400,
+          "y": 520
+        },
+        "code_8" : {
+          "x": 1400,
+          "y": 490
+        },
+        "code_9" : {
+          "x": 1400,
+          "y": 460
+        },
+        "code_10" : {
+          "x": 1400,
+          "y": 430
+        },
+        "code_11" : {
+          "x": 1400,
+          "y": 400
+        },
+        "code_12" : {
+          "x": 1400,
+          "y": 370
+        },
+        "code_13" : {
+          "x": 1400,
+          "y": 340
+        }
+      },
+      "refill_berimond": {
+        "click_1": {
+          "x": 250,
+          "y": 1050
+        },
+        "click_2": {
+          "x": 830,
+          "y": 720
+        },
+        "click_3": {
+          "x": 1032,
+          "y": 550
+        },
+        "click_4": {
+          "x": 1080,
+          "y": 607
+        },
+        "click_5": {
+          "x": 1200,
+          "y": 766
+        },
+        "click_6": {
+          "x": 870,
+          "y": 760
+        },
+        "click_7": {
+          "x": 1111,
+          "y": 550
+        },
+        "click_8": {
+          "x": 1234,
+          "y": 270
+        },
+
+        "click_9": {
+          "x": 1233,
+          "y": 271
+        },
+        "click_10": {
+          "x": 1326,
+          "y": 262
+        },
+        "click_11": {
+          "x": 955,
+          "y": 670
+        },
+
+        "click_12": {
+          "x": 1237,
+          "y": 270
+        },
+        "click_13": {
+          "x": 1330,
+          "y": 263
+        },
+        "troops_offsets": {
+          "offset_troop_1": {
+            "x": 750,
+            "y": 667
+          },
+          "offset_troop_2": {
+            "x": 800,
+            "y": 667
+          },
+          "offset_troop_3": {
+            "x": 860,
+            "y": 667
+          },
+          "offset_troop_4": {
+            "x": 910,
+            "y": 667
+          },
+          "offset_troop_5": {
+            "x": 967,
+            "y": 667
+          },
+          "offset_troop_6": {
+            "x": 1023,
+            "y": 667
+          },
+          "offset_troop_7": {
+            "x": 1072,
+            "y": 667
+          }
+
+        }
+      },
+     "berimond_find_target_right_down": {
+       "x": 1684,
+       "y": 1052
+     },
+     "berimond_no_troop_army_1": {
+       "x": 1100,
+       "y": 670
+     },
+     "berimond_no_troop_army_2": {
+       "x": 1567,
+       "y": 179
+     }
+    },
+    "buy_speed_bonus" : {
+      "click_1" : {
+        "x" : 0,
+        "y" : 0
+      }
+    },
+    "close_all_windows": {
+      "prime_time": {
+        "x": 1262,
+        "y": 280
+      },
+      "map_found": {
+        "x": 976,
+        "y": 703
+      },
+      "free_outpost": {
+        "x": 971,
+        "y": 743
+      },
+      "triple_action": {
+        "x": 1320,
+        "y": 277
+      },
+      "info_dialog": {
+        "x": 955,
+        "y": 676
+      },
+      "close_ali": {
+        "x": 1200,
+        "y": 757
+      }
+    }
+}
