@@ -437,7 +437,7 @@ class FortressManager(BaseTab):
                     target_x, target_y = coords.split(":")
                     self.log_message(status="info", message=f"Spouštím útok: {world_code} | [{coords}]")
                     self.closing_windows_allowed = False
-                    time.sleep(1)
+                    time.sleep(2.5) # TOTO URCUJE DOBU PRED UTOPKEM CD
                     self.SendAttackFirstWaveAuto(
                         target_x=int(target_x),
                         target_y=int(target_y),

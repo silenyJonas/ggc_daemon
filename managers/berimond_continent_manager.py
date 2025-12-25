@@ -41,27 +41,27 @@ class BerimondContinentManager(BaseTab):
             )
             #time.sleep(self.config_reader.get_value("settings.offsets.default_click_delay"))
     def BerimondRefill(self, troops_from_left):
-        time.sleep(self.click_delay_offset)
+        time.sleep(self.click_delay_offset+0.5)
         pyautogui.click(
             self.config_reader.get_value("actions_click_patter.refill_berimond.click_1.x"),
             self.config_reader.get_value("actions_click_patter.refill_berimond.click_1.y")
         )
-        time.sleep(self.click_delay_offset)
+        time.sleep(self.click_delay_offset+0.5)
         pyautogui.click(
             self.config_reader.get_value("actions_click_patter.refill_berimond.click_2.x"),
             self.config_reader.get_value("actions_click_patter.refill_berimond.click_2.y")
         )
-        time.sleep(self.click_delay_offset)
+        time.sleep(self.click_delay_offset+0.5)
         pyautogui.click(
             self.config_reader.get_value("actions_click_patter.refill_berimond.troops_offsets.offset_troop_"+str(troops_from_left)+".x"),
             self.config_reader.get_value("actions_click_patter.refill_berimond.troops_offsets.offset_troop_"+str(troops_from_left)+".y")
         )
-        time.sleep(self.click_delay_offset)
+        time.sleep(self.click_delay_offset+0.5)
         pyautogui.click(
             self.config_reader.get_value("actions_click_patter.refill_berimond.click_3.x"),
             self.config_reader.get_value("actions_click_patter.refill_berimond.click_3.y")
         )
-        time.sleep(self.click_delay_offset)
+        time.sleep(self.click_delay_offset+0.5)
         pyautogui.click(
             self.config_reader.get_value("actions_click_patter.refill_berimond.click_4.x"),
             self.config_reader.get_value("actions_click_patter.refill_berimond.click_4.y")

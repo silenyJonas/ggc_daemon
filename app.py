@@ -7,7 +7,7 @@ import datetime  # Importujeme modul datetime
 
 
 # Import všech tříd záložek z balíčku 'tabs'
-from tabs import BaronTab, BerimondTab, ConfigurationTab, DiscordTab, FortressTab, NomadTab, ScanTab, TutorialTab, BerimondGreenTab, BulkBuyTab
+from tabs import BaronTab, BerimondTab, ConfigurationTab, DiscordTab, FortressTab, NomadTab, ScanTab, TutorialTab, BerimondGreenTab, BulkBuyTab, RiftTab, DeliverySpamTab
 from services.config_manager import ConfigManager
 from services.shared_data import message_queue, LogMessage
 
@@ -52,6 +52,8 @@ class App(tk.Tk):
         self.tutorialTab = TutorialTab(notebook)
         self.beriGreenlTab = BerimondGreenTab(notebook)
         self.bulkBuyTab = BulkBuyTab(notebook)
+        self.riftTab = RiftTab(notebook)
+        self.spamTab = DeliverySpamTab(notebook)
 
         notebook.add(self.fortessTab, text="Fort")
         notebook.add(self.baronTab, text="Baron")
@@ -61,8 +63,10 @@ class App(tk.Tk):
         notebook.add(self.scanTab, text="Scan")
         notebook.add(self.configurationTab, text="Conf")
         notebook.add(self.discordTab, text="DC")
-        notebook.add(self.tutorialTab, text="Help")
         notebook.add(self.bulkBuyTab, text="Item Buy")
+        notebook.add(self.riftTab, text="Rift")
+        notebook.add(self.spamTab, text="Spam")
+        notebook.add(self.tutorialTab, text="Help")
 
 
     def process_messages(self):

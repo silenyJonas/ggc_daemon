@@ -1,0 +1,91 @@
+{
+    "tasks": [
+        {
+            "name": "Pulťa",
+            "dms_horse_feather": true,
+            "dms_active": false,
+            "dms_last_wipe": "-",
+            "fwd_horse_feather": true,
+            "fwd_active": false,
+            "fwd_last_wipe": "-"
+        },
+        {
+            "name": "RPadre",
+            "dms_horse_feather": true,
+            "dms_active": true,
+            "dms_last_wipe": "11:00:14",
+            "fwd_horse_feather": true,
+            "fwd_active": false,
+            "fwd_last_wipe": "-"
+        },
+        {
+            "name": "Gajdy1996",
+            "dms_horse_feather": true,
+            "dms_active": true,
+            "dms_last_wipe": "11:06:32",
+            "fwd_horse_feather": true,
+            "fwd_active": false,
+            "fwd_last_wipe": "-"
+        },
+        {
+            "name": "fanyny",
+            "dms_horse_feather": true,
+            "dms_active": true,
+            "dms_last_wipe": "11:11:16",
+            "fwd_horse_feather": true,
+            "fwd_active": false,
+            "fwd_last_wipe": "-"
+        },
+        {
+            "name": "Calweld",
+            "dms_horse_feather": true,
+            "dms_active": true,
+            "dms_last_wipe": "11:15:20",
+            "fwd_horse_feather": true,
+            "fwd_active": false,
+            "fwd_last_wipe": "-"
+        },
+        {
+            "name": "ramboje",
+            "dms_horse_feather": true,
+            "dms_active": true,
+            "dms_last_wipe": "11:19:24",
+            "fwd_horse_feather": true,
+            "fwd_active": false,
+            "fwd_last_wipe": "-"
+        },
+        {
+            "name": "ALF1208",
+            "dms_horse_feather": true,
+            "dms_active": true,
+            "dms_last_wipe": "11:23:29",
+            "fwd_horse_feather": true,
+            "fwd_active": false,
+            "fwd_last_wipe": "-"
+        },
+        {
+            "name": "Lindor King",
+            "dms_horse_feather": true,
+            "dms_active": false,
+            "dms_last_wipe": "-",
+            "fwd_horse_feather": true,
+            "fwd_active": false,
+            "fwd_last_wipe": "-"
+        },
+        {
+            "name": "Honza80",
+            "dms_horse_feather": true,
+            "dms_active": false,
+            "dms_last_wipe": "-",
+            "fwd_horse_feather": true,
+            "fwd_active": false,
+            "fwd_last_wipe": "-"
+        }
+    ],
+    "castle_settings": {
+        "zeli": 1,
+        "zima": 4,
+        "pisek": 5,
+        "ohen": 6
+    }
+}

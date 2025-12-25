@@ -8,3 +8,5 @@ from .scan import ScanTab
 from .discord import DiscordTab
 from .tutorial import TutorialTab
 from .bulk_buy import BulkBuyTab
+from .rift import RiftTab
+from .delivery_spam import DeliverySpamTab
