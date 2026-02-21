@@ -14,7 +14,7 @@ class BaronTab(BaseTab, ttk.Frame):
         super().__init__(parent, *args, **kwargs)
         # Initialize start_index and end_index with default values
         self.start_index = 1
-        self.end_index = 35
+        self.end_index = 49
         self.is_running = False  # HLÍDACÍ PROMĚNNÁ
         self.feather_horses = True
         self.manager = BaronManager()  # Inicializace Manageru

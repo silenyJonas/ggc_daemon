@@ -127,7 +127,7 @@ class ScanManager(BaseTab):
         thread = threading.Thread(target=_scan_loop, daemon=True)
         thread.start()
 
-    def ScanFort(self, json_name: str, scan_distance=50, dismiss_popups=True):
+    def ScanFort(self, json_name: str, scan_distance=50, dismiss_popups=True, scan_both_worlds=False):
         """Provede scan pevností z JSON a hlásí postup do GUI logu."""
 
         self.can_continue = False  # reset na začátku scanu

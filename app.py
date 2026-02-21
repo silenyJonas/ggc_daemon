@@ -25,23 +25,30 @@ class App(tk.Tk):
         self.create_widgets()
 
     def create_widgets(self):
-        """Vytváří hlavní widgety aplikace, včetně notebooku."""
-        main_pane = ttk.PanedWindow(self, orient=tk.HORIZONTAL)
+        """Vytváří hlavní widgety aplikace, včetně notebooku umístěného nad logem."""
+        # Změna orientace na VERTICAL, aby byly prvky pod sebou
+        main_pane = ttk.PanedWindow(self, orient=tk.VERTICAL)
         main_pane.pack(fill=tk.BOTH, expand=True)
 
+        # Horní část: Notebook se záložkami
         notebook = ttk.Notebook(main_pane)
-        main_pane.add(notebook)
+        # Přidáme notebook do PanedWindow (bude nahoře)
+        main_pane.add(notebook, weight=3)
 
+        # Spodní část: Rámec pro zprávy (log)
         messages_frame = ttk.Frame(main_pane)
-        main_pane.add(messages_frame)
+        # Přidáme rámec do PanedWindow (bude dole)
+        main_pane.add(messages_frame, weight=1)
 
         log_label = ttk.Label(messages_frame, text="Log hlášek", font=("Arial", 12, "bold"))
-        log_label.pack(fill=tk.X, padx=5, pady=5)
+        log_label.pack(fill=tk.X, padx=5, pady=2)
 
-        self.log_text = tk.Text(messages_frame, wrap="word", bg="black", fg="white")
+        # Samotné textové pole logu
+        self.log_text = tk.Text(messages_frame, wrap="word", bg="black", fg="white", height=10)
         self.log_text.pack(fill=tk.BOTH, expand=True, padx=5, pady=5)
         self.log_text.config(state="disabled")
 
+        # Inicializace záložek (zůstává stejné)
         self.fortessTab = FortressTab(notebook)
         self.baronTab = BaronTab(notebook)
         self.nomadTab = NomadTab(notebook)
@@ -55,6 +62,7 @@ class App(tk.Tk):
         self.riftTab = RiftTab(notebook)
         self.spamTab = DeliverySpamTab(notebook)
 
+        # Přidání záložek do notebooku (zůstává stejné)
         notebook.add(self.fortessTab, text="Fort")
         notebook.add(self.baronTab, text="Baron")
         notebook.add(self.nomadTab, text="Nom")
