@@ -16,118 +16,7 @@ class ScanManager(BaseTab):
     def ReuturnCanContinue(self):
         return self.can_continue
 
-    def ScanFort_save(self, json_name: str, scan_distance=50, dismiss_popups=True):
-        """Provede scan pevností z JSON a hlásí postup do GUI logu."""
-
-        self.can_continue = False
-
-        self.ClearFortArray(json_name)
-
-        def _scan_loop():
-            countdown = self.config_reader.get_value("settings.offsets.default_time_before_run")
-            for x in range(countdown, 0, -1):
-                if self.stop_event.is_set():
-                    self.log_message(status="info", message="ScanFort zastaven uživatelem během odpočtu")
-                    return
-                self.log_message(status="info", message=f"Spuštění ScanFort za: {x}")
-                time.sleep(1)
-
-            # souřadnice hradu
-            castle_x, castle_y = 0, 0
-            if json_name == "winter":
-                castle_x = self.config_reader.get_value("main_castle_cords.winter.x")
-                castle_y = self.config_reader.get_value("main_castle_cords.winter.y")
-            elif json_name == "sand":
-                castle_x = self.config_reader.get_value("main_castle_cords.sand.x")
-                castle_y = self.config_reader.get_value("main_castle_cords.sand.y")
-            else:
-                castle_x = self.config_reader.get_value("main_castle_cords.fire.x")
-                castle_y = self.config_reader.get_value("main_castle_cords.fire.y")
-
-            # JSON pevnosti
-            base_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
-                                    "fortress_data_storage")
-            json_path = os.path.join(base_dir, f"{json_name}.json")
-            with open(json_path, "r", encoding="utf-8") as f:
-                fort_data = json.load(f)
-
-            forts_sorted = sorted(fort_data.items(), key=lambda kv: int(kv[0].split("_")[1]))
-            counter = 1
-
-            for fort_key, target in forts_sorted:
-
-                if self.stop_event.is_set():
-                    self.log_message(status="info", message="ScanFort zastaven uživatelem")
-                    return
-                private_click_offset_01 = 0.1
-                private_click_offset_02 = 0.2
-                private_click_offset_05 = 0.2
-                target_x, target_y = target["x"], target["y"]
-                distance = self.GetDistance(castle_x, castle_y, target_x, target_y)
-
-                if dismiss_popups and counter % 10 == 0 and distance <= scan_distance:
-                    self.CloseWindowsPopups()
-
-                if distance > scan_distance:
-                    self.log_message(
-                        status="info",
-                        message=f"Sken: [{target_x}:{target_y}] přeskočen (vzdálenost {distance:.2f} > {scan_distance}) | Note: {counter}/{len(forts_sorted)}"
-                    )
-                    counter += 1
-                    continue
-
-                try:
-
-                    pyautogui.click(self.config_reader.get_value(
-                        "actions_click_patter.send_attack_first_wave_auto.click_select_cords.x"),
-                                    self.config_reader.get_value(
-                                        "actions_click_patter.send_attack_first_wave_auto.click_select_cords.y"))
-                    pyautogui.click(self.config_reader.get_value(
-                        "actions_click_patter.send_attack_first_wave_auto.click_select_cords.x"),
-                                    self.config_reader.get_value(
-                                        "actions_click_patter.send_attack_first_wave_auto.click_select_cords.y"))
-                    time.sleep(private_click_offset_01)
-                    pyautogui.typewrite(str(target_x))
-                    pyautogui.press("Tab")
-                    pyautogui.typewrite(str(target_y))
-                    pyautogui.press("Enter")
-                    time.sleep(private_click_offset_05)
-                    pyautogui.moveTo(
-                        self.config_reader.get_value("actions_click_patter.send_attack_first_wave_auto.click_1.x"),
-                        self.config_reader.get_value("actions_click_patter.send_attack_first_wave_auto.click_1.y"))
-                    time.sleep(private_click_offset_01)
-                    pyautogui.click(
-                        self.config_reader.get_value("actions_click_patter.send_attack_first_wave_auto.click_1.x") + 5,
-                        self.config_reader.get_value("actions_click_patter.send_attack_first_wave_auto.click_1.y") + 5)
-                    time.sleep(private_click_offset_01)
-                    pyautogui.moveTo(
-                        self.config_reader.get_value("actions_click_patter.send_attack_first_wave_auto.click_2.x"),
-                        self.config_reader.get_value("actions_click_patter.send_attack_first_wave_auto.click_2.y"))
-                    time.sleep(0.1)
-
-                    # OCR a zápis paralelně
-                    cords = f"{target_x}:{target_y}"
-                    kingdom = "ZIM" if json_name == "winter" else "PSK" if json_name == "sand" else "OHN"
-                    threading.Thread(target=self.AnalyzeScreenFort,
-                                     kwargs={"kingdom": kingdom, "cords": cords, "json_name": json_name,
-                                             "stop_event": self.stop_event}, daemon=True).start()
-
-                except Exception as e:
-                    self.log_message(status="error", message=f"Chyba při scanu [{target_x}:{target_y}]: {e}")
-
-                self.log_message(status="ok",
-                                 message=f"Scan dokončen: [{target_x}:{target_y}] | Note: {counter}/{len(forts_sorted)}")
-                counter += 1
-                time.sleep(private_click_offset_02)
-
-            self.log_message(status="info", message="ScanFort dokončen.")
-            self.SortFortArray(json_name=json_name)
-
-        # vlákno pro sken
-        thread = threading.Thread(target=_scan_loop, daemon=True)
-        thread.start()
-
-    def ScanFort(self, json_name: str, scan_distance=50, dismiss_popups=True, scan_both_worlds=False):
+    def ScanFort_save(self, json_name: str, scan_distance=50, dismiss_popups=True, scan_both_worlds=False):
         """Provede scan pevností z JSON a hlásí postup do GUI logu."""
 
         self.can_continue = False  # reset na začátku scanu
@@ -242,6 +131,161 @@ class ScanManager(BaseTab):
             self.SortFortArray(json_name=json_name)
 
             # nastavení can_continue až po dokončení celého scanu
+            self.can_continue = True
+
+        thread = threading.Thread(target=_scan_loop, daemon=True)
+        thread.start()
+        return thread
+
+    def ChangeWorld(self, world_name: str, sand_pos, fire_pos):
+        base_x = self.config_reader.get_value("settings.castle_list_cords.base_x")
+        base_y = self.config_reader.get_value("settings.castle_list_cords.base_y")
+
+        castle_y = 0
+
+        if(world_name=="sand"):
+            castle_y = self.config_reader.get_value("settings.castle_list_cords.castle_y_"+str(sand_pos))
+        else:
+            castle_y = self.config_reader.get_value("settings.castle_list_cords.castle_y_" + str(fire_pos))
+
+        sleep_time = self.config_reader.get_value("settings.offsets.default_click_delay")
+
+        time.sleep(2)
+        pyautogui.click(base_x,base_y)
+        time.sleep(2)
+
+        pyautogui.click(base_x, castle_y)
+        time.sleep(2)
+
+    def ScanFort(self, json_name: str, scan_distance=50, dismiss_popups=True, scan_both_worlds=False, sand_pos=4, fire_pos=5):
+        """Provede scan pevností. Pokud je scan_both_worlds True, ignoruje json_name a projede Písek i Oheň."""
+
+        self.can_continue = False
+
+        def _scan_loop():
+            # Určení světů ke scanování
+            worlds_to_scan = []
+            if scan_both_worlds:
+                worlds_to_scan = ["sand", "fire"]
+            else:
+                worlds_to_scan = [json_name]
+
+            # Společný odpočet na začátku
+            countdown = self.config_reader.get_value("settings.offsets.default_time_before_run")
+            for x in range(countdown, 0, -1):
+                if self.stop_event.is_set():
+                    self.log_message(status="info", message="ScanFort zastaven uživatelem během odpočtu")
+                    self.can_continue = True
+                    return
+                self.log_message(status="info", message=f"Spuštění ScanFort za: {x}")
+                time.sleep(1)
+
+            # Iterace přes vybrané světy
+            for current_world in worlds_to_scan:
+                if self.stop_event.is_set():
+                    break
+
+                self.log_message(status="info", message=f"Začínám scan světa: {current_world}")
+
+                # Vymazání DB pro daný svět před startem
+                self.ClearFortArray(current_world)
+
+                # Přepnutí světa (pokud je implementováno)
+                self.ChangeWorld(current_world, sand_pos, fire_pos)
+
+                # --- Nastavení souřadnic hradu a načtení JSON dat ---
+                castle_x = self.config_reader.get_value(f"main_castle_cords.{current_world}.x")
+                castle_y = self.config_reader.get_value(f"main_castle_cords.{current_world}.y")
+
+                base_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
+                                        "fortress_data_storage")
+                json_path = os.path.join(base_dir, f"{current_world}.json")
+
+                with open(json_path, "r", encoding="utf-8") as f:
+                    fort_data = json.load(f)
+
+                forts_sorted = sorted(fort_data.items(), key=lambda kv: int(kv[0].split("_")[1]))
+                counter = 1
+                ocr_threads = []
+
+                # --- Samotný průchod pevnostmi (Logika zůstává stejná) ---
+                for fort_key, target in forts_sorted:
+                    if self.stop_event.is_set():
+                        self.log_message(status="info",
+                                         message=f"ScanFort zastaven uživatelem během světa {current_world}")
+                        break
+
+                    if dismiss_popups and counter % 10 == 0:
+                        self.CloseWindowsPopups()
+
+                    private_click_offset_01 = 0.1
+                    private_click_offset_02 = 0.2
+                    private_click_offset_05 = 0.2
+                    target_x, target_y = target["x"], target["y"]
+                    distance = self.GetDistance(castle_x, castle_y, target_x, target_y)
+
+                    if distance > scan_distance:
+                        self.log_message(
+                            status="info",
+                            message=f"Sken {current_world}: [{target_x}:{target_y}] přeskočen (vzdálenost {distance:.2f} > {scan_distance})"
+                        )
+                        counter += 1
+                        continue
+
+                    try:
+                        # Klikací sekvence (beze změny)
+                        pyautogui.click(self.config_reader.get_value(
+                            "actions_click_patter.send_attack_first_wave_auto.click_select_cords.x"),
+                                        self.config_reader.get_value(
+                                            "actions_click_patter.send_attack_first_wave_auto.click_select_cords.y"))
+                        pyautogui.click(self.config_reader.get_value(
+                            "actions_click_patter.send_attack_first_wave_auto.click_select_cords.x"),
+                                        self.config_reader.get_value(
+                                            "actions_click_patter.send_attack_first_wave_auto.click_select_cords.y"))
+                        time.sleep(private_click_offset_01)
+                        pyautogui.typewrite(str(target_x))
+                        pyautogui.press("Tab")
+                        pyautogui.typewrite(str(target_y))
+                        pyautogui.press("Enter")
+                        time.sleep(private_click_offset_05)
+                        pyautogui.moveTo(
+                            self.config_reader.get_value("actions_click_patter.send_attack_first_wave_auto.click_1.x"),
+                            self.config_reader.get_value("actions_click_patter.send_attack_first_wave_auto.click_1.y"))
+                        time.sleep(private_click_offset_01)
+                        pyautogui.click(self.config_reader.get_value(
+                            "actions_click_patter.send_attack_first_wave_auto.click_1.x") + 5,
+                                        self.config_reader.get_value(
+                                            "actions_click_patter.send_attack_first_wave_auto.click_1.y") + 5)
+                        time.sleep(private_click_offset_01)
+                        pyautogui.moveTo(
+                            self.config_reader.get_value("actions_click_patter.send_attack_first_wave_auto.click_2.x"),
+                            self.config_reader.get_value("actions_click_patter.send_attack_first_wave_auto.click_2.y"))
+                        time.sleep(0.1)
+
+                        # OCR vlákno
+                        cords = f"{target_x}:{target_y}"
+                        kingdom = "ZIM" if current_world == "winter" else "PSK" if current_world == "sand" else "OHN"
+                        t = threading.Thread(target=self.AnalyzeScreenFort,
+                                             kwargs={"kingdom": kingdom, "cords": cords, "json_name": current_world,
+                                                     "stop_event": self.stop_event}, daemon=True)
+                        t.start()
+                        ocr_threads.append(t)
+
+                    except Exception as e:
+                        self.log_message(status="error",
+                                         message=f"Chyba při scanu {current_world} [{target_x}:{target_y}]: {e}")
+
+                    counter += 1
+                    time.sleep(private_click_offset_02)
+
+                # Počkání na OCR a seřazení pro aktuální svět
+                for t in ocr_threads:
+                    t.join()
+
+                self.SortFortArray(json_name=current_world)
+                self.log_message(status="info", message=f"Svět {current_world} dokončen.")
+
+            self.log_message(status="info", message="Scanování všech vybraných světů dokončeno.")
             self.can_continue = True
 
         thread = threading.Thread(target=_scan_loop, daemon=True)
