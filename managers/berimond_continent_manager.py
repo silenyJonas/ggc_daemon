@@ -7,7 +7,7 @@ class BerimondContinentManager(BaseTab):
     def __init__(self, parent=None, *args, **kwargs):
         super().__init__(parent, *args, **kwargs)
 
-    def BerimondOnContinent(self, max_attacks, horses, attacks_between_refill, troops_from_left, delay_between_attacks):
+    def BerimondOnContinent(self, max_attacks, horses, attacks_between_refill, troops_from_left, delay_between_attacks, auto_find_tower):
         for x in range(max_attacks):
             if x % attacks_between_refill == 0 and x != 0:
                 #refill
@@ -15,12 +15,13 @@ class BerimondContinentManager(BaseTab):
 
             time.sleep(delay_between_attacks)
 
-            #click pravo dole
-            time.sleep(0.1)
-            pyautogui.click(
-                self.config_reader.get_value("actions_click_patter.berimond_find_target_right_down.x"),
-                self.config_reader.get_value("actions_click_patter.berimond_find_target_right_down.y")
-            )
+            if(auto_find_tower):
+                #click pravo dole
+                time.sleep(0.1)
+                pyautogui.click(
+                    self.config_reader.get_value("actions_click_patter.berimond_find_target_right_down.x"),
+                    self.config_reader.get_value("actions_click_patter.berimond_find_target_right_down.y")
+                )
 
             time.sleep(self.config_reader.get_value("settings.offsets.default_click_delay"))
             self.SendAttackFirstWaveAuto(send_with_cords=False, feather_horse=horses)

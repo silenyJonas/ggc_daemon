@@ -10,3 +10,4 @@ from .tutorial import TutorialTab
 from .bulk_buy import BulkBuyTab
 from .rift import RiftTab
 from .delivery_spam import DeliverySpamTab
+from .ElementPVP import ElementPVPTab

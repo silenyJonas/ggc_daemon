@@ -24,7 +24,7 @@ class FortressTab(BaseTab, ttk.Frame):
         self.rubies_spent = 0
         self.manager = FortressManager()
         # nová proměnná místo combined_world
-        self.selected_world = "zim"  # one | all | zim_pis | zim_ohn | pis_ohn
+        self.selected_world = "zim"  # zim | pis | ohn | all (což je pis+ohn)
 
         self.scan_manager = ScanManager()
 
@@ -131,35 +131,26 @@ class FortressTab(BaseTab, ttk.Frame):
         ttk.Radiobutton(horse_frame, text="Pírko koně", variable=self.feather_horses_var, value=True,
                         command=self._on_horse_changed).pack(side=tk.LEFT, padx=5)
 
-        # --- Výběr světa (více možností) ---
+        # --- Výběr světa (zredukované možnosti) ---
         world_frame = ttk.Frame(self)
         world_frame.pack(pady=10, anchor="w")
 
         ttk.Label(world_frame, text="Svět:").pack(side=tk.LEFT, padx=(0, 10))
         self.world_var = tk.StringVar(value=self.selected_world)
 
-        self.rb_world_zim = ttk.Radiobutton(world_frame, text="Z", variable=self.world_var, value="zim",
+        self.rb_world_zim = ttk.Radiobutton(world_frame, text="Zima", variable=self.world_var, value="zim",
                                             command=self._on_world_changed)
-        self.rb_world_pis = ttk.Radiobutton(world_frame, text="P", variable=self.world_var, value="pis",
+        self.rb_world_pis = ttk.Radiobutton(world_frame, text="Písek", variable=self.world_var, value="pis",
                                             command=self._on_world_changed)
-        self.rb_world_ohn = ttk.Radiobutton(world_frame, text="O", variable=self.world_var, value="ohn",
+        self.rb_world_ohn = ttk.Radiobutton(world_frame, text="Oheň", variable=self.world_var, value="ohn",
                                             command=self._on_world_changed)
-        self.rb_world_zim_pis = ttk.Radiobutton(world_frame, text="Z + P", variable=self.world_var, value="zim_pis",
-                                                command=self._on_world_changed)
-        self.rb_world_zim_ohn = ttk.Radiobutton(world_frame, text="Z + O", variable=self.world_var, value="zim_ohn",
-                                                command=self._on_world_changed)
-        self.rb_world_pis_ohn = ttk.Radiobutton(world_frame, text="P + O", variable=self.world_var, value="pis_ohn",
-                                                command=self._on_world_changed)
-        self.rb_world_all = ttk.Radiobutton(world_frame, text="All", variable=self.world_var, value="all",
+        self.rb_world_all = ttk.Radiobutton(world_frame, text="Písek + Oheň", variable=self.world_var, value="all",
                                             command=self._on_world_changed)
 
         self.rb_world_zim.pack(side=tk.LEFT, padx=5)
         self.rb_world_pis.pack(side=tk.LEFT, padx=5)
         self.rb_world_ohn.pack(side=tk.LEFT, padx=5)
         self.rb_world_all.pack(side=tk.LEFT, padx=5)
-        self.rb_world_zim_pis.pack(side=tk.LEFT, padx=5)
-        self.rb_world_zim_ohn.pack(side=tk.LEFT, padx=5)
-        self.rb_world_pis_ohn.pack(side=tk.LEFT, padx=5)
 
         # --- Odklikávání ---
         dismiss_frame = ttk.Frame(self)
@@ -173,7 +164,7 @@ class FortressTab(BaseTab, ttk.Frame):
         ttk.Radiobutton(dismiss_frame, text="Ne", variable=self.auto_dismiss_var, value=False,
                         command=self._on_dismiss_changed).pack(side=tk.LEFT, padx=5)
 
-        # --- Scan před ježděním ---
+        # --- Scan před ježděním (nyní vždy viditelný) ---
         self.scan_frame = ttk.Frame(self)
         self.scan_frame.pack(pady=10, anchor="w")
 
@@ -244,52 +235,20 @@ class FortressTab(BaseTab, ttk.Frame):
         horse_type = "Pírko" if self.feather_horses else "Gold"
         self.log_message(status="info", message=f"Typ koně byl změněn na: {horse_type}")
 
-    def _on_world_changed_save(self):
-        self.selected_world = self.world_var.get()
-        mapping = {
-            "zim": "Zima",
-            "pis": "Písek",
-            "ohn": "Oheň",
-            "all": "Všechny světy",
-            "zim_pis": "Zima + Písek",
-            "zim_ohn": "Zima + Oheň",
-            "pis_ohn": "Písek + Oheň"
-        }
-        self.log_message(status="info", message=f"Svět byl změněn na: {mapping.get(self.selected_world, self.selected_world)}")
-
-        # Pokud není "Jeden svět", skryj scan
-        if self.selected_world != "zim" or self.selected_world != "pis" or self.selected_world != "ohn":
-            self.scan_var.set(False)
-            self.scan_frame.pack_forget()
-            self.extra_world_frame.pack_forget()
-        else:
-            self.scan_frame.pack(pady=10, anchor="w")
-
     def _on_world_changed(self):
         self.selected_world = self.world_var.get()
         mapping = {
             "zim": "Zima",
             "pis": "Písek",
             "ohn": "Oheň",
-            "all": "Všechny světy",
-            "zim_pis": "Zima + Písek",
-            "zim_ohn": "Zima + Oheň",
-            "pis_ohn": "Písek + Oheň"
+            "all": "Písek + Oheň"
         }
         self.log_message(
             status="info",
             message=f"Svět byl změněn na: {mapping.get(self.selected_world, self.selected_world)}"
         )
-
-        # Pokud je vybrán jen jeden svět ("zim", "pis", "ohn"), zobraz scan
-        if self.selected_world in ["zim", "pis", "ohn"]:
-            self.scan_frame.pack(pady=10, anchor="w")
-            self.extra_world_frame.pack_forget()  # můžeš nechat nebo upravit podle potřeby
-        else:
-            # Pokud je vybráno něco jiného, skryj scan a nastav hodnotu False
-            self.scan_var.set(False)
-            self.scan_frame.pack_forget()
-            self.extra_world_frame.pack_forget()
+        # Ve všech zbývajících případech (zim, pis, ohn, all) má být scan vidět
+        self.scan_frame.pack(pady=10, anchor="w")
 
     def _on_dismiss_changed(self):
         self.auto_dismiss_windows = bool(self.auto_dismiss_var.get())
@@ -352,7 +311,6 @@ class FortressTab(BaseTab, ttk.Frame):
         if self.scan_before_riding:
             self.scan_manager.ScanFort(json_name=self.extra_world_var.get())
 
-        #zde je problem ze se to rozbije zasekne tady nekde je problem se scan before riding
         while not self.scan_manager.ReuturnCanContinue() and self.scan_before_riding==True:
             if not self.is_running:
                 break
@@ -371,16 +329,17 @@ class FortressTab(BaseTab, ttk.Frame):
                 closing_popups=self.auto_dismiss_windows,
                 scan_before_run=self.scan_before_riding,
                 world_scan=self.extra_world,
-                auto_buy_speed_bonus=self.auto_buy_speed_bonus   # <- nový parametr
+                auto_buy_speed_bonus=self.auto_buy_speed_bonus
             )
         else:
             try:
+                # Načtení hodnot z entry polí před spuštěním multitaskingu
                 self.winter_atk_code = int(self.winter_atk_entry.get())
                 self.sand_atk_code = int(self.sand_atk_entry.get())
                 self.fire_atk_code = int(self.fire_atk_entry.get())
-                self.winter_castle_entry=int(self.winter_castle_entry.get())
-                self.sand_castle_entry=int(self.sand_castle_entry.get())
-                self.fire_castle_entry=int(self.fire_castle_entry.get())
+                winter_castle_list_pos = int(self.winter_castle_entry.get())
+                sand_castle_list_pos = int(self.sand_castle_entry.get())
+                fire_castle_list_pos = int(self.fire_castle_entry.get())
             except ValueError:
                 self.log_message(status="error", message="Chyba: předvolby útoků musí být čísla.")
                 self.is_running = False
@@ -390,15 +349,12 @@ class FortressTab(BaseTab, ttk.Frame):
                 fire_atk_code=self.fire_atk_code,
                 sand_atk_code=self.sand_atk_code,
                 winter_atk_code=self.winter_atk_code,
-                winter_castle_list_pos=self.winter_castle_entry,
-                sand_castle_list_pos=self.sand_castle_entry,
-                fire_castle_list_pos=self.fire_castle_entry,
+                winter_castle_list_pos=winter_castle_list_pos,
+                sand_castle_list_pos=sand_castle_list_pos,
+                fire_castle_list_pos=fire_castle_list_pos,
                 distance=self.max_distance,
-                auto_buy_speed_bonus=self.auto_buy_speed_bonus   # <- nový parametr
+                auto_buy_speed_bonus=self.auto_buy_speed_bonus
             )
-
-
-
 
     def _on_graph_clicked(self):
         try:

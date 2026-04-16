@@ -19,6 +19,7 @@ class BerimondTab(BaseTab, ttk.Frame):
         self.attacks_between_refill = 3
         self.units_from_left = 1  # nové pole jednotky na plnění z leva
         self.delay_between_attacks = 2
+        self.auto_find_tower = True  # Výchozí hodnota pro novou funkci
 
         self.create_widgets()
 
@@ -35,6 +36,15 @@ class BerimondTab(BaseTab, ttk.Frame):
                         command=self._on_horse_changed).pack(side=tk.LEFT, padx=5)
         ttk.Radiobutton(horse_frame, text="Pírko koně", variable=self.feather_horses_var, value=True,
                         command=self._on_horse_changed).pack(side=tk.LEFT, padx=5)
+
+        # --- Automaticky najít věž (Checkbox) ---
+        self.auto_find_var = tk.BooleanVar(value=self.auto_find_tower)
+        self.auto_find_check = ttk.Checkbutton(
+            self,
+            text="Automaticky najít věž",
+            variable=self.auto_find_var
+        )
+        self.auto_find_check.pack(pady=5, anchor="w")
 
         # --- Kolik max útoků ---
         attacks_frame = ttk.Frame(self)
@@ -92,6 +102,8 @@ class BerimondTab(BaseTab, ttk.Frame):
             self.attacks_between_refill = int(self.refill_attacks_entry.get())
             self.units_from_left = int(self.units_entry.get())
             self.delay_between_attacks = int(self.delay_entry.get())
+            # Načtení hodnoty z checkboxu
+            self.auto_find_tower = self.auto_find_var.get()
         except ValueError:
             self.log_message(status="error", message="Chyba: zadejte platná čísla pro útoky a jednotky.")
             return
@@ -124,9 +136,15 @@ class BerimondTab(BaseTab, ttk.Frame):
                 horses=self.feather_horses,
                 attacks_between_refill=self.attacks_between_refill,
                 troops_from_left=self.units_from_left,
-                delay_between_attacks=self.delay_between_attacks)  # děděná metoda, implementace není zde
+                delay_between_attacks=self.delay_between_attacks,
+                auto_find_tower=self.auto_find_tower  # Předání nové proměnné
+            )
         except Exception as e:
             self.log_message(status="error", message=f"Chyba při spuštění BerimondOnContinent: {e}")
 
         self.is_running = False
-        self.log_message(status="info", message="Akce dokončena.")
+        self.update_button_text() # Pozor, tuto funkci jsi v kódu neměl definovanou, ale bývá zvykem ji volat pro reset textu tlačítka.
+
+    def update_button_text(self):
+        # Pomocná funkce pro případný update UI po skončení smyčky
+        pass

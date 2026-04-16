@@ -16,9 +16,10 @@ class ScanTab(BaseTab, ttk.Frame):
         self.dismiss_popups = tk.BooleanVar(value=False)
         self.scan_both_worlds = tk.BooleanVar(value=False)
 
-        # Nové proměnné pro pozice hradů (default 4 a 5)
-        self.sand_pos_var = tk.StringVar(value="4")
-        self.fire_pos_var = tk.StringVar(value="5")
+        # Pozice hradů (Default: Fire 9, Sand 8, Winter 7)
+        self.fire_pos_var = tk.StringVar(value="4")
+        self.sand_pos_var = tk.StringVar(value="3")
+        self.winter_pos_var = tk.StringVar(value="2")
 
         self.create_widgets()
 
@@ -36,24 +37,29 @@ class ScanTab(BaseTab, ttk.Frame):
         self.rb_fire = ttk.Radiobutton(self.frame_radios, text="Oheň", variable=self.selected_json, value="fire")
         self.rb_fire.pack(side="left", padx=5)
 
-        # Checkbox pro hromadný scan (Písek + Oheň)
+        # Checkbox pro hromadný scan
         self.check_both = ttk.Checkbutton(
             self,
-            text="Scanovat Písek + Oheň zároveň",
+            text="Scanovat Oheň + Písek zároveň",
             variable=self.scan_both_worlds,
             command=self._on_both_worlds_toggled
         )
         self.check_both.pack(pady=5, anchor="w")
 
-        # --- RÁMEC PRO POZICE HRADŮ (zobrazí se jen při both worlds) ---
-        self.frame_positions = ttk.Frame(self)
-        # Necháme ho zatím schovaný přes pack_forget nebo ho budeme dynamicky ovládat
+        # --- RÁMEC PRO POZICE HRADŮ ---
+        self.frame_positions = ttk.LabelFrame(self, text=" Pozice hradů v seznamu ", padding=5)
+        # Ve výchozím stavu viditelný, nebo jej můžeš ovládat v _on_both_worlds_toggled
+        self.frame_positions.pack(pady=5, fill="x", anchor="w")
 
-        ttk.Label(self.frame_positions, text="Pozice Písek (odspodu):").pack(side="left", padx=(0, 5))
-        ttk.Entry(self.frame_positions, textvariable=self.sand_pos_var, width=5).pack(side="left", padx=(0, 15))
+        # Grid pro hezké uspořádání pozic
+        ttk.Label(self.frame_positions, text="Oheň:").grid(row=0, column=0, padx=5, pady=2)
+        ttk.Entry(self.frame_positions, textvariable=self.fire_pos_var, width=5).grid(row=0, column=1, padx=5)
 
-        ttk.Label(self.frame_positions, text="Pozice Oheň (odspodu):").pack(side="left", padx=(0, 5))
-        ttk.Entry(self.frame_positions, textvariable=self.fire_pos_var, width=5).pack(side="left")
+        ttk.Label(self.frame_positions, text="Písek:").grid(row=0, column=2, padx=5, pady=2)
+        ttk.Entry(self.frame_positions, textvariable=self.sand_pos_var, width=5).grid(row=0, column=3, padx=5)
+
+        ttk.Label(self.frame_positions, text="Zima:").grid(row=0, column=4, padx=5, pady=2)
+        ttk.Entry(self.frame_positions, textvariable=self.winter_pos_var, width=5).grid(row=0, column=5, padx=5)
 
         # --- Rámec pro scan distance ---
         frame_distance = ttk.Frame(self)
@@ -68,10 +74,8 @@ class ScanTab(BaseTab, ttk.Frame):
         frame_dismiss.pack(pady=5, anchor="w")
 
         ttk.Label(frame_dismiss, text="Odklikávat popupy:").pack(side="left", padx=(0, 5))
-        ttk.Radiobutton(frame_dismiss, text="Ano", variable=self.dismiss_popups, value=True,
-                        command=self._on_dismiss_changed).pack(side="left", padx=5)
-        ttk.Radiobutton(frame_dismiss, text="Ne", variable=self.dismiss_popups, value=False,
-                        command=self._on_dismiss_changed).pack(side="left", padx=5)
+        ttk.Radiobutton(frame_dismiss, text="Ano", variable=self.dismiss_popups, value=True).pack(side="left", padx=5)
+        ttk.Radiobutton(frame_dismiss, text="Ne", variable=self.dismiss_popups, value=False).pack(side="left", padx=5)
 
         # --- Potvrzení a tlačítko ---
         self.confirm_check = ttk.Checkbutton(
@@ -86,60 +90,46 @@ class ScanTab(BaseTab, ttk.Frame):
         self.button.pack(pady=10, anchor="w")
 
     def _on_both_worlds_toggled(self):
-        """Deaktivuje výběr světů a zobrazí pole pro pozice hradů."""
+        """Deaktivuje výběr světů při hromadném scanu."""
         if self.scan_both_worlds.get():
             self.selected_json.set("")
             self.rb_winter.config(state="disabled")
             self.rb_sand.config(state="disabled")
             self.rb_fire.config(state="disabled")
-
-            # Zobrazíme políčka pro pozice (vložíme je pod checkbox)
-            self.frame_positions.pack(pady=5, anchor="w", after=self.check_both)
-
-            self.log_message(status="info", message="Vybrán kombinovaný scan: Písek + Oheň")
+            self.log_message(status="info", message="Vybrán kombinovaný scan všech světů")
         else:
             self.selected_json.set("sand")
             self.rb_winter.config(state="normal")
             self.rb_sand.config(state="normal")
             self.rb_fire.config(state="normal")
 
-            # Skryjeme políčka pro pozice
-            self.frame_positions.pack_forget()
-
     def update_button_state(self):
-        """Povolí nebo zakáže tlačítko podle checkboxu."""
         state = "normal" if self.confirm_overwrite.get() else "disabled"
         self.button.config(state=state)
 
-    def _on_dismiss_changed(self):
-        state = "Ano" if self.dismiss_popups.get() else "Ne"
-        self.log_message(status="info", message=f"Odklikávání popupů: {state}")
-
     def button_action(self):
-        """Akce, která se provede po stisknutí tlačítka."""
         if not self.confirm_overwrite.get():
             return
 
         try:
             scan_distance = int(self.scan_distance_var.get())
-            # Získání pozic z inputů
-            sand_pos = int(self.sand_pos_var.get())
-            fire_pos = int(self.fire_pos_var.get())
+            # Získání pozic z UI
+            f_pos = int(self.fire_pos_var.get())
+            s_pos = int(self.sand_pos_var.get())
+            w_pos = int(self.winter_pos_var.get())
         except ValueError:
             scan_distance = 999999
-            sand_pos = 4
-            fire_pos = 5
+            f_pos, s_pos, w_pos = 9, 8, 7
 
-        dismiss = self.dismiss_popups.get()
-        both_worlds = self.scan_both_worlds.get()
-        chosen_world = self.selected_json.get()
-
-        # Předání nových parametrů do manageru
+        # Volání manageru s předáním slovníku pozic
         self.manager.ScanFort(
-            chosen_world,
+            self.selected_json.get(),
             scan_distance=scan_distance,
-            dismiss_popups=dismiss,
-            scan_both_worlds=both_worlds,
-            sand_pos=sand_pos,
-            fire_pos=fire_pos
+            dismiss_popups=self.dismiss_popups.get(),
+            scan_both_worlds=self.scan_both_worlds.get(),
+            positions={
+                "fire": f_pos,
+                "sand": s_pos,
+                "winter": w_pos
+            }
         )

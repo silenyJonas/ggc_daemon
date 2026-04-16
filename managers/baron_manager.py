@@ -1,4 +1,3 @@
-# managers/baron_manager.py
 import time
 import pyautogui
 
@@ -25,32 +24,50 @@ class BaronManager(BaseTab):
         pyautogui.click(base_x, target_y)
         time.sleep(5)  # Pauza na načtení mapy světa
 
-    def RunAllBarons(self, feather_horses, delay, wait_minutes, positions, tab_instance):
+    def RunAllBarons(self, max_attacks, feather_horses, delay, wait_minutes, positions, tab_instance):
         """
-        Nekonečná smyčka: Oheň -> Písek -> Zima -> Zelí.
-        Loguje progress útoků, odpočet mezi nimi a čeká custom čas po každém světě.
+        Nekonečná smyčka: Oheň -> Písek -> Zima. (Zelí odstraněno)
+        Nyní se nejprve přepne svět a až poté čeká pauza (kromě úplně prvního startu).
         """
         order = [
-            ("fire", positions.get("fire", 5)),
-            ("sand", positions.get("sand", 4)),
-            ("winter", positions.get("winter", 3)),
-            ("green", positions.get("green", 1))
+            ("fire", positions.get("fire", 9)),
+            ("sand", positions.get("sand", 8)),
+            ("winter", positions.get("winter", 7))
         ]
 
-        self.log_message(status="info", message="Spouštím NONSTOP režim všech světů.")
+        self.log_message(status="info", message="Spouštím NONSTOP režim (Oheň, Písek, Zima).")
+
+        first_run = True  # Příznak pro první spuštění
+
+        ali_click_state = True
 
         while tab_instance.is_running:
             for world_name, world_pos in order:
                 if not tab_instance.is_running:
                     break
 
+                # 1. KROK: Přepnutí světa
                 self.log_message(status="info", message=f"--- PŘEPÍNÁM NA SVĚT: {world_name.upper()} ---")
                 self.ChangeWorld(world_pos)
 
+                # 2. KROK: Pokud to NENÍ první spuštění, odpočítej pauzu po přepnutí
+                if not first_run:
+                    self.log_message(status="info", message=f"Svět přepnut. Nyní pauza {wait_minutes} min před útoky.")
+                    for min_rem in range(wait_minutes, 0, -1):
+                        for sec_rem in range(60):
+                            if not tab_instance.is_running: return
+                            if sec_rem == 0:
+                                self.log_message(status="info",
+                                                 message=f"Odpočinek na světě {world_name.upper()}: {min_rem} min zbývá.")
+                            time.sleep(1)
+
+                # Po prvním světě (Oheň) už příznak vypneme, aby se u dalších čekalo
+                first_run = False
+
+                # 3. KROK: Samotné útoky
                 config_path_prefix = f"entity_list.barons.{world_name}"
 
-                # PRO TESTOVÁNÍ: range(1, 6) = 5 útoků. Pro ostrou verzi změň na (1, 151)
-                for i in range(1, 151):
+                for i in range(1, max_attacks + 1):
                     if not tab_instance.is_running:
                         return
 
@@ -60,7 +77,8 @@ class BaronManager(BaseTab):
                     if target_x and target_y:
                         start_time = time.time()
 
-                        self.log_message(status="info", message=f"[{world_name.upper()}] Posílám útok {i}/150")
+                        self.log_message(status="info",
+                                         message=f"[{world_name.upper()}] Posílám útok {i}/{max_attacks}")
 
                         self.SendAttackFirstWaveAuto(
                             target_x=target_x,
@@ -69,7 +87,22 @@ class BaronManager(BaseTab):
                             note=f"Nonstop {world_name} #{i}"
                         )
 
-                        # Výpočet čekání do dalšího útoku
+                        #odkliknout pokud zautocite na hrace popup
+                        time.sleep(1)
+                        pyautogui.click(1136, 364)
+
+                        #kdyby to kliklo na hrace tak odkliknbout jednou to klikne jednou a pak dvakrat a pak jednou kolo od kola:
+                        time.sleep(1)
+                        if ali_click_state:
+                            pyautogui.click(1200, 750)
+                            ali_click_state = False
+                        else:
+                            pyautogui.click(1200, 750)
+                            time.sleep(1)
+                            pyautogui.click(1200, 750)
+                            ali_click_state = True
+
+                        # Výpočet čekání do dalšího útoku v rámci světa
                         elapsed = time.time() - start_time
                         wait = delay - elapsed
 
@@ -84,18 +117,7 @@ class BaronManager(BaseTab):
                         self.log_message(status="info", message=f"Na světě {world_name} není více cílů v configu.")
                         break
 
-                # Pauza po dojetí světa (používá hodnotu z GUI)
-                if not tab_instance.is_running: break
-
-                self.log_message(status="info", message=f"Svět {world_name} hotov. Pauza {wait_minutes} min.")
-
-                # Odpočet pauzy po minutách
-                for min_rem in range(wait_minutes, 0, -1):
-                    for sec_rem in range(60):
-                        if not tab_instance.is_running: return
-                        if sec_rem == 0:
-                            self.log_message(status="info", message=f"Zbývá {min_rem} min do dalšího světa.")
-                        time.sleep(1)
+                self.log_message(status="info", message=f"Útoky na světě {world_name.upper()} dokončeny.")
 
     def SendBaronAttacks(
             self,
