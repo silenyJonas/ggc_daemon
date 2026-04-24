@@ -12,8 +12,196 @@ class FortressManager(BaseTab):
         self.closing_windows_allowed = True
         self.send_with_cords = True
 
-
     def MultitaskingFortressRider(
+            self,
+            winter_atk_code,
+            sand_atk_code,
+            fire_atk_code,
+            winter_castle_list_pos=2,
+            sand_castle_list_pos=3,
+            fire_castle_list_pos=4,
+            feather_forse=True,
+            distance=99999,
+            closing_popups=True,
+            scan_before_run=False,
+            world_scan=None,
+            auto_buy_speed_bonus=False
+    ):
+        self.log_message(status="info", message="Multi-tasking rotace spuštěna.")
+
+        if closing_popups:
+            threading.Thread(target=self.close_popups_loop, daemon=True).start()
+
+        records = self.ReturnSortedFortressList()
+        records = self.FilterFortressListByDistance(records=records, max_distance=distance)
+
+        # stav přípravy pro každý záznam
+        prepared_world = {}  # rec -> bool (byl přepnut svět)
+        prepared_cords = {}  # rec -> {"atk_code": str, "cords_found": bool}
+
+        ali_swap = True
+
+        while True:
+            now = datetime.now()
+
+            if auto_buy_speed_bonus:
+                current_time = datetime.now().strftime("%H:%M:%S")
+                if "11:03:00" <= current_time <= "11:03:30":
+                    self.BuySpeedBonus()
+
+            if not records:
+                self.log_message(status="info", message="Žádné budoucí záznamy v DB.")
+                time.sleep(1)
+                continue
+
+            try:
+                expired_records = []
+                skipped_any = False
+
+                for rec in list(records):
+                    world_code, coords, time_part = rec.split(";")
+                    next_time = datetime.strptime(time_part, "%Y-%m-%d %H:%M:%S")
+                    delta = (next_time - now).total_seconds()
+
+                    castle_x = castle_y = 0
+                    if world_code == "ZIM":
+                        castle_x = self.config_reader.get_value("main_castle_cords.winter.x")
+                        castle_y = self.config_reader.get_value("main_castle_cords.winter.y")
+                    elif world_code == "PSK":
+                        castle_x = self.config_reader.get_value("main_castle_cords.sand.x")
+                        castle_y = self.config_reader.get_value("main_castle_cords.sand.y")
+                    elif world_code == "OHN":
+                        castle_x = self.config_reader.get_value("main_castle_cords.fire.x")
+                        castle_y = self.config_reader.get_value("main_castle_cords.fire.y")
+
+                    target_x_str, target_y_str = coords.split(":")
+                    target_x = int(target_x_str)
+                    target_y = int(target_y_str)
+
+                    dist = self.GetDistance(
+                        castle_x=castle_x,
+                        castle_y=castle_y,
+                        target_x=target_x,
+                        target_y=target_y
+                    )
+
+                    if dist > distance:
+                        self.log_message(
+                            status="info",
+                            message=f"Přeskočeno (daleko): {world_code} | [{coords}] | vzdálenost {dist}"
+                        )
+                        records.remove(rec)
+                        prepared_world.pop(rec, None)
+                        prepared_cords.pop(rec, None)
+                        skipped_any = True
+                        continue
+
+                    if delta <= 0:
+                        expired_records.append(rec)
+                    else:
+
+
+
+                        # --- ROZDÍL OD SINGLE: přepni svět 5s před expirací ---
+                        if int(delta) == 5 and not prepared_world.get(rec, False):
+
+                            # co dva utoky odkliknout ali
+                            if (ali_swap):
+                                ali_swap = False
+                                pyautogui.click(1225, 267)
+                            else:
+                                ali_swap = True
+
+                            selected_atk_code = ""
+                            if world_code == "ZIM":
+                                selected_atk_code = str(winter_atk_code)
+                            elif world_code == "PSK":
+                                selected_atk_code = str(sand_atk_code)
+                            elif world_code == "OHN":
+                                selected_atk_code = str(fire_atk_code)
+
+                            self.ChangeWorld(
+                                world_code=world_code,
+                                winter_castle_list_pos=winter_castle_list_pos,
+                                sand_castle_list_pos=sand_castle_list_pos,
+                                fire_castle_list_pos=fire_castle_list_pos
+                            )
+                            prepared_world[rec] = True
+                            prepared_cords[rec] = {"atk_code": selected_atk_code, "cords_found": False}
+
+                        # --- stejné jako single: najdi věž 3s před expirací ---
+                        if int(delta) == 3 and prepared_world.get(rec, False):
+                            cords_data = prepared_cords.get(rec, {})
+                            if not cords_data.get("cords_found", False):
+                                self.FindByCords(target_x=target_x, target_y=target_y)
+                                prepared_cords[rec]["cords_found"] = True
+
+                        self.log_message(
+                            status="info",
+                            message=f"Čeká: {world_code} | [{coords}] | Dist: {round(dist)} | Za: {int(delta)} s"
+                        )
+                        break  # stejné jako single – break na prvním čekajícím
+
+                if skipped_any and not expired_records:
+                    self.log_message(status="info", message="Žádný vhodný záznam v dosahu, čekám...")
+
+                # --- Spuštění expirovaných útoků ---
+                for rec in expired_records:
+                    world_code, coords, _ = rec.split(";")
+                    target_x, target_y = coords.split(":")
+
+                    cords_data = prepared_cords.get(rec, {})
+                    send_with_cords = not cords_data.get("cords_found", False)
+
+
+
+                    # --- ROZDÍL OD SINGLE: vyber atk_code a přepni svět pokud ještě nebyl přepnut ---
+                    if not prepared_world.get(rec, False):
+                        selected_atk_code = ""
+                        if world_code == "ZIM":
+                            selected_atk_code = str(winter_atk_code)
+                        elif world_code == "PSK":
+                            selected_atk_code = str(sand_atk_code)
+                        elif world_code == "OHN":
+                            selected_atk_code = str(fire_atk_code)
+
+                        self.ChangeWorld(
+                            world_code=world_code,
+                            winter_castle_list_pos=winter_castle_list_pos,
+                            sand_castle_list_pos=sand_castle_list_pos,
+                            fire_castle_list_pos=fire_castle_list_pos
+                        )
+                    else:
+                        selected_atk_code = cords_data.get("atk_code", "")
+
+                    self.log_message(status="info", message=f"Spouštím útok: {world_code} | [{coords}]")
+                    self.closing_windows_allowed = False
+                    time.sleep(2.5)  # stejné jako single
+
+
+
+
+                    self.SendAttackFirstWaveAuto(
+                        attack_code=selected_atk_code,
+                        target_x=int(target_x),
+                        target_y=int(target_y),
+                        feather_horse=feather_forse,
+                        note="Útok poslán",
+                        close_popups=True,
+                        send_with_cords=send_with_cords
+                    )
+                    self.closing_windows_allowed = True
+
+                    prepared_world.pop(rec, None)
+                    prepared_cords.pop(rec, None)
+                    records.remove(rec)
+
+            except Exception as e:
+                msg = f"Chyba při čtení záznamů (Multitasking): {e}"
+                self.log_message(status="error", message=msg)
+
+            time.sleep(1)
+    def MultitaskingFortressRider_save(
             self,
             winter_atk_code,
             sand_atk_code,
