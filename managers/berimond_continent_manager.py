@@ -57,7 +57,8 @@ class BerimondContinentManager(BaseTab):
             self.config_reader.get_value("actions_click_patter.refill_berimond.troops_offsets.offset_troop_"+str(troops_from_left)+".x"),
             self.config_reader.get_value("actions_click_patter.refill_berimond.troops_offsets.offset_troop_"+str(troops_from_left)+".y")
         )
-        time.sleep(self.click_delay_offset+0.5)
+
+
         pyautogui.click(
             self.config_reader.get_value("actions_click_patter.refill_berimond.click_3.x"),
             self.config_reader.get_value("actions_click_patter.refill_berimond.click_3.y")
@@ -77,7 +78,18 @@ class BerimondContinentManager(BaseTab):
             self.config_reader.get_value("actions_click_patter.refill_berimond.click_6.x"),
             self.config_reader.get_value("actions_click_patter.refill_berimond.click_6.y")
         )
+        time.sleep(1)
+        pyautogui.click(1200, 552)
+        time.sleep(0.2)
+        pyautogui.click(1200, 552)
+        time.sleep(0.2)
+        pyautogui.click(1200, 552)
+        pyautogui.click(
+            self.config_reader.get_value("actions_click_patter.refill_berimond.click_7.x"),
+            self.config_reader.get_value("actions_click_patter.refill_berimond.click_7.y")
+        )
         time.sleep(self.click_delay_offset)
+        #druhe kliknuti na skip pro pripad ze by tam byla 30 minutovka
         pyautogui.click(
             self.config_reader.get_value("actions_click_patter.refill_berimond.click_7.x"),
             self.config_reader.get_value("actions_click_patter.refill_berimond.click_7.y")
